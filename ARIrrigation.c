@@ -77,12 +77,7 @@ void loop() {
     if (waterRunning == 0) { //Check that no routine running
       waterRunning = 1; //Note that routine has started
       runStep = 0; //Reset current step count
-      findRunTime(runStep);
-      Serial.println("Starting");
-      Serial.print("First step will run for ");
-      Serial.print(stepRunTime);
-      Serial.println(" minutes.");
-      stepRunTime = stepRunTime * 60 * 1000; //convert run time of step from minutes to milliseconds
+      stepRunTime = findRunTime(runStep); //Call function to determine run time of current step
       stepStart = millis();
     }
   }
@@ -104,25 +99,26 @@ void loop() {
           digitalWrite(solPins[x], LOW); //Make sure solenoid isn't running
         }
       } else {
-        findRunTime(runStep);
-        Serial.print("Step ");
-      	Serial.print(runStep + 1);
-      	Serial.print(" will run for ");
-      	Serial.print(stepRunTime);
-      	Serial.println(" minutes.");
-      	stepRunTime = stepRunTime * 60 * 1000; //convert run time of step from minutes to milliseconds
+        stepRunTime = findRunTime(runStep);
       }
       stepStart = millis();
     }
   }
 }
 
-int findRunTime(int x){
-  stepRunTime = 0; //Reset run time of step
+int findRunTime(int x){ //Function for determining and announcing total run time of step (x)
+  int stepRunTemp = 0; //Reset run time of step
   for (int y = 0; y < 5; y++) { //find Max run time of current step
     stepTimeCurrent = runRoutine[x][y];
-    if (stepTimeCurrent > stepRunTime) {
-      stepRunTime = stepTimeCurrent;
+    if (stepTimeCurrent > stepRunTemp) {
+      stepRunTemp = stepTimeCurrent;
     }
+    Serial.print("Step ");
+    Serial.print(x + 1);
+    Serial.print(" will run for ");
+    Serial.print(stepRunTemp);
+    Serial.println(" minutes.");
+    stepRunTemp = stepRunTemp * 60 * 1000; //convert run time of step from minutes to milliseconds
+    return stepRunTemp;
   }
 }
