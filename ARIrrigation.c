@@ -119,7 +119,7 @@ void loop() {
 
 int findRunTime(int x){
   stepRunTime = 0; //Reset run time of step
-  for (y = 0; y < 5; y++) { //find Max run time of current step
+  for (int y = 0; y < 5; y++) { //find Max run time of current step
     stepTimeCurrent = runRoutine[x][y];
     if (stepTimeCurrent > stepRunTime) {
       stepRunTime = stepTimeCurrent;
