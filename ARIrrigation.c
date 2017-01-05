@@ -106,19 +106,19 @@ void loop() {
   }
 }
 
-int findRunTime(int x){ //Function for determining and announcing total run time of step (x)
+int findRunTime(int x){ //Function for determining and announcing total run time of step (j)
   int stepRunTemp = 0; //Reset run time of step
-  for (int y = 0; y < 5; y++) { //find Max run time of current step
+  for (int y = 0; y < 5; y++) { //find Max run time of requested step
     stepTimeCurrent = runRoutine[x][y];
     if (stepTimeCurrent > stepRunTemp) {
       stepRunTemp = stepTimeCurrent;
     }
-    Serial.print("Step ");
-    Serial.print(x + 1);
-    Serial.print(" will run for ");
-    Serial.print(stepRunTemp);
-    Serial.println(" minutes.");
-    stepRunTemp = stepRunTemp * 60 * 1000; //convert run time of step from minutes to milliseconds
-    return stepRunTemp;
   }
+  Serial.print("Step ");
+  Serial.print(x + 1);
+  Serial.print(" will run for ");
+  Serial.print(stepRunTemp);
+  Serial.println(" minutes.");
+  stepRunTemp = stepRunTemp * 60 * 1000; //convert run time of step from minutes to milliseconds
+  return stepRunTemp;
 }
