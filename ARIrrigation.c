@@ -76,7 +76,10 @@ void loop() {
   if (runWater == 1) { //Check for trigger state
     if (waterRunning == 0) { //Check that no routine running
       waterRunning = 1; //Note that routine has started
+<<<<<<< HEAD
       Serial.println("Starting");
+=======
+>>>>>>> origin/master
       runStep = 0; //Reset current step count
       stepRunTime = findRunTime(runStep); //Call function to determine run time of current step
       stepStart = millis();
@@ -108,15 +111,26 @@ void loop() {
   }
 }
 
+<<<<<<< HEAD
 int findRunTime(int j){ //Function for determining and announcing total run time of step (x)
   int stepRunTemp = 0; //Reset run time of step
   for (int y = 0; y < 5; y++) { //find Max run time of current step
     stepTimeCurrent = runRoutine[j][y];
+=======
+int findRunTime(int x){ //Function for determining and announcing total run time of step (x)
+  int stepRunTemp = 0; //Reset run time of step
+  for (int y = 0; y < 5; y++) { //find Max run time of current step
+    stepTimeCurrent = runRoutine[x][y];
+>>>>>>> origin/master
     if (stepTimeCurrent > stepRunTemp) {
       stepRunTemp = stepTimeCurrent;
     }
     Serial.print("Step ");
+<<<<<<< HEAD
     Serial.print(j + 1);
+=======
+    Serial.print(x + 1);
+>>>>>>> origin/master
     Serial.print(" will run for ");
     Serial.print(stepRunTemp);
     Serial.println(" minutes.");
